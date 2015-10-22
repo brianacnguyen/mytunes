@@ -10,21 +10,20 @@ var SongQueue = Songs.extend({
 
     this.on('delete', function(model, collection, options){
       this.remove(model);
-    });
-
-    this.on('ended', function(){
-      if (this.length === 1) {
+      if (this.at(0)) {
         this.playFirst();
       }
     });
 
-    this.on('dequeue', function() {
-      this.remove();
+    this.on('dequeue', function(model, collection, options){
+      this.remove(model);
     })
   },
 
   playFirst: function() {
-    this.at(0).play();
+    if (this.at(0)) {
+      this.at(0).play();
+    }
   },
 
 });
