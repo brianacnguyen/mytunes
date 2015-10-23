@@ -26,8 +26,4 @@ var PlayerView = Backbone.View.extend({
     return audioPlayer;
   }
 
-  // end: function() {
-  //   this.model.ended();
-  // }
-
 });

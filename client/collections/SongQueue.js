@@ -6,6 +6,7 @@ var SongQueue = Songs.extend({
       if (collection.length === 1) {
         this.playFirst();
       }
+      this.updateLocalStorage(true);
     });
 
     this.on('delete', function(model, collection, options){
@@ -17,6 +18,7 @@ var SongQueue = Songs.extend({
 
     this.on('dequeue', function(model, collection, options){
       this.remove(model);
+      this.updateLocalStorage(false);
     })
   },
 
@@ -25,5 +27,18 @@ var SongQueue = Songs.extend({
       this.at(0).play();
     }
   },
+
+  updateLocalStorage: function(add) {
+    var currentQueue = JSON.parse(localStorage.getItem('songQueue'));
+
+    if (add) {
+      currentQueue.push(this);
+
+    } else {
+      currentQueue.shift(0);
+    }
+
+    localStorage.setItem('songQueue', JSON.stringify(currentQueue));
+  }
 
 });
