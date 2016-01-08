@@ -25,6 +25,7 @@
       $(function(){
         // set up model objects
         var library = new Songs(songData);
+        console.log(library)
         //var songQueue = new SongQueue(localStorage.getItem('songQueue'));
         var app = new AppModel({library: library}); //, songQueue: songQueue});
 
